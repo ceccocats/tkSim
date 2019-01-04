@@ -30,3 +30,7 @@ obj/
 ehthumbs.db
 Thumbs.db
 *~
+
+
+# lib
+tkBridge/*.so
