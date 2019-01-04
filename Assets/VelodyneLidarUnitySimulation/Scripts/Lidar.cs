@@ -53,7 +53,7 @@ public class Lidar : MonoBehaviour {
                 }
                 else
                 {
-                    distances[indx] = 100.0f;
+                    distances[indx] = 0.0f;
                 }
 				//Debug.DrawRay(transform.position, dir * distances[indx], Color.green);
 
