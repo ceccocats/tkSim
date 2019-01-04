@@ -13,3 +13,11 @@ refine with blender
 
 # convert dbc
 dbcc -k -u tesla_can.dbc
+
+#camera
+sudo apt install v4l2loopback-* 
+
+then:
+sudo modprobe v4l2loopback
+mkfifo /tmp/tkcamera0
+tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -vcodec rawvideo -pix_fmt yuyv422 -threads 0 -f v4l2 /dev/video1

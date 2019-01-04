@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CanSensor : MonoBehaviour {
 
+	public bool ok;
+
 	public MSVehicleControllerFree vehicle;
 	private float [] vals = new float[2];
 
 	// Use this for initialization
 	void Start () {
-		bool error = tkBridge.tkbridge_can_init ("vcan0");
-		Debug.Log ("can init: " + error);
+		ok = tkBridge.tkbridge_can_init ("vcan0");
 		InvokeRepeating("canUpdate", 0.0f, 1.0f/100.0f);
 	}
 	
@@ -19,10 +20,10 @@ public class CanSensor : MonoBehaviour {
 		vals [0] = vehicle._wheels.leftFrontWheel.wheelCollider.steerAngle;
 		vals [1] = vehicle.KMh;
 
-		Debug.Log ("steer: " + vals [0]);
+		//Debug.Log ("steer: " + vals [0]);
 	}
 		
 	void canUpdate () {
-		tkBridge.tkbridge_can_write_vals (vals, 2);
+		ok = tkBridge.tkbridge_can_write_vals (vals, 2);
 	}
 }

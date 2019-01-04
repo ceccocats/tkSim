@@ -9,6 +9,14 @@
 #include <linux/can/raw.h>
 #include "dbc/tesla_can.h"
 
+#include <iostream>
+#include <fstream>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
 
 extern "C" {
 
@@ -25,8 +33,9 @@ struct CANframe_t {
     void reset() { *data() = 0; }
 };
 
-
-int can_soc = -1;
+// vars
+static int can_soc = -1;
+static std::ofstream camera_fifo;
 
 /**
     Init can
@@ -73,6 +82,9 @@ bool tkbridge_can_close() {
 
 bool tkbridge_can_write_fd(struct can_frame frame) {
 
+    if(can_soc<0)
+        return false;
+
     int retval;
     retval = write(can_soc, &frame, sizeof(struct can_frame));
 
@@ -95,6 +107,10 @@ bool tkbridge_can_write(int id, int dlc, uint64_t data) {
 
 
 bool tkbridge_can_read(struct can_frame *frame) {
+
+    if(can_soc<0)
+        return false;
+
     int retval = 0;
 
     retval = read(can_soc, frame, sizeof(struct can_frame));
@@ -117,7 +133,7 @@ bool tkbridge_can_read(struct can_frame *frame) {
  */
 bool tkbridge_can_write_vals(float *vals, int n_vals) {
 
-    if(n_vals < 2)
+    if(can_soc < 0 || n_vals < 2)
         return false;
 
     CANframe_t msg;
@@ -141,5 +157,31 @@ bool tkbridge_can_write_vals(float *vals, int n_vals) {
 
     return true;
 }
+
+bool tkbridge_camera_init() {
+
+    const char *out = "/tmp/tkcamera0";
+    camera_fifo.close();
+    camera_fifo.open(out);
+
+    if(!camera_fifo)
+        return false;
+
+    return true;
+}
+
+bool tkbridge_camera(uint8_t data[], int len) {
+     
+    if(!camera_fifo) {
+        return false;
+    }
+
+    for (int i = 0; i < len; ++i)
+        camera_fifo << data[i];
+
+    return true;
+}
+
+
 
 }
