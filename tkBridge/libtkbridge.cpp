@@ -27,7 +27,8 @@ static std::fstream camera_fifo;
 bool tkbridge_can_init(char *port) {
 
     // init virtual device
-    system("gksu -- bash -c 'modprobe vcan; ip link add dev vcan0 type vcan; ip link set down vcan0; ip link set up vcan0'");
+    if(system("ifconfig | grep vcan0") != 0)
+        system("gksu -- bash -c 'modprobe vcan; ip link add dev vcan0 type vcan; ip link set down vcan0; ip link set up vcan0'");
 
     struct ifreq ifr;
     struct sockaddr_can addr;

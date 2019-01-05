@@ -33,5 +33,6 @@ Thumbs.db
 
 
 # lib
-tkBridge/*.so
+*.so
 tkBridge/test
+tkBridge/dbc_hipertcar

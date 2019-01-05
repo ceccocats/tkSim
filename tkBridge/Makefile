@@ -1,20 +1,22 @@
 all: libtkbridge
 
 UNITY_DIR=/home/cecco/Programmi/Unity2018/Editor/
+CAN_LIB=dbc/libteslacan.so
+#CAN_LIB=dbc_hipertcar/libhipertcarcan.so
 
-libteslacan: dbc/tesla_can.c dbc/tesla_fun.c
-	g++ dbc/tesla_fun.c dbc/tesla_can.c -shared -fPIC -o libteslacan.so
 
-libtkbridge: libtkbridge.cpp libteslacan
-	g++ libtkbridge.cpp -L. -lteslacan `pkg-config --libs opencv` -shared -fPIC -o libtkbridge.so
+CAN_LIB_PATH=`dirname $(CAN_LIB)`
+
+libtkbridge: libtkbridge.cpp 
+	$(MAKE) -C $(CAN_LIB_PATH)
+	g++ libtkbridge.cpp $(CAN_LIB) `pkg-config --libs opencv` -shared -fPIC -o libtkbridge.so
 
 test: libtkbridge
-	g++ test.cpp libtkbridge.so libteslacan.so -o test
+	g++ test.cpp libtkbridge.so $(CAN_LIB) -o test
 
 clean:
-	rm *.so *~
+	rm -f *.so *~
+	$(MAKE) -C $(CAN_LIB_PATH) clean
 
 install: libtkbridge	
-	cp  *.so $(UNITY_DIR)
-	
-
+	cp  *.so $(CAN_LIB) $(UNITY_DIR)
