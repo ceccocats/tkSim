@@ -7,40 +7,27 @@
 #include <net/if.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
-#include "dbc/tesla_can.h"
 
 #include <iostream>
 #include <fstream>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
+#include "common.h"
 
 extern "C" {
 
-struct CANframe_t {
-   struct can_frame frame;  // socketCAN frame
-   uint64_t stamp;          // timestamp of message when read
-
-   // return integer ID
-   int     id()     { return frame.can_id; }
-   
-   // return data as a uint64_t pointer, useful for DBC encoding
-   uint64_t *data() { return reinterpret_cast<uint64_t*>(frame.data); }
-
-    void reset() { *data() = 0; }
-};
-
 // vars
 static int can_soc = -1;
-static std::ofstream camera_fifo;
+static std::fstream camera_fifo;
 
 /**
     Init can
 */
 bool tkbridge_can_init(char *port) {
+
+    // init virtual device
+    system("gksu -- bash -c 'modprobe vcan; ip link add dev vcan0 type vcan; ip link set down vcan0; ip link set up vcan0'");
 
     struct ifreq ifr;
     struct sockaddr_can addr;
@@ -124,7 +111,6 @@ bool tkbridge_can_read(struct can_frame *frame) {
 }
 
 
-
 /**
  *  write values in order:
  *  - steer angle 
@@ -136,29 +122,13 @@ bool tkbridge_can_write_vals(float *vals, int n_vals) {
     if(can_soc < 0 || n_vals < 2)
         return false;
 
-    CANframe_t msg;
-
-    can_0x003_STW_ANGL_STAT_t ANGL_STAT;
-    can_0x155_ESP_B_t ESP_B;
-
-    // steer angle
-    msg.frame.can_id = 0x003;
-    msg.frame.can_dlc = 8;    
-    encode_can_0x003_StW_Angl(&ANGL_STAT, vals[0]);
-    pack_can_0x003_STW_ANGL_STAT(&ANGL_STAT, msg.data()); // fill data 
-    tkbridge_can_write_fd(msg.frame); 
-
-    // speed
-    msg.frame.can_id = 0x155;
-    msg.frame.can_dlc = 8;    
-    encode_can_0x155_ESP_vehicleSpeed(&ESP_B, vals[1]);
-    pack_can_0x155_ESP_B(&ESP_B, msg.data()); // fill data 
-    tkbridge_can_write_fd(msg.frame);
-
-    return true;
+    return can_private_write_vals(vals);
 }
 
 bool tkbridge_camera_init() {
+
+    // make fifo file for ffmpeg
+    system("mkfifo /tmp/tkcamera0");
 
     const char *out = "/tmp/tkcamera0";
     camera_fifo.close();

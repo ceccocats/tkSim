@@ -34,3 +34,4 @@ Thumbs.db
 
 # lib
 tkBridge/*.so
+tkBridge/test
