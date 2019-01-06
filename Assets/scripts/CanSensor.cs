@@ -12,12 +12,13 @@ public class CanSensor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ok = tkBridge.tkbridge_can_init ("vcan0");
-		InvokeRepeating("canUpdate", 0.0f, 1.0f/100.0f);
+		InvokeRepeating("canUpdate", 0.0f, 1.0f/50.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		vals [0] = vehicle._wheels.leftFrontWheel.wheelCollider.steerAngle;
+		float cur_steer = -(vehicle._wheels.leftFrontWheel.wheelCollider.steerAngle+vehicle._wheels.rightFrontWheel.wheelCollider.steerAngle)/2;
+		vals [0] = cur_steer*Mathf.Deg2Rad;
 		vals [1] = vehicle.KMh;
 
 		//Debug.Log ("steer: " + vals [0]);

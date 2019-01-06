@@ -417,7 +417,8 @@ public class MSSceneControllerFree : MonoBehaviour {
 
 					gearText.text = "Gear: " + vehicleCode.currentGear;
 					kmhText.text = "Velocity(km/h): " + (int)(vehicleCode.KMh * clampGear);
-					mphText.text = "Velocity(mp/h): " + (int)(vehicleCode.KMh * 0.621371f * clampGear);
+					double cur_steer = -(vehicleCode._wheels.leftFrontWheel.wheelCollider.steerAngle+vehicleCode._wheels.rightFrontWheel.wheelCollider.steerAngle)/2;
+					mphText.text = "Steer(deg): " + (int)(cur_steer);
 					handBrakeText.text = "HandBreak: " + vehicleCode.handBrakeTrue;
 					pauseText.text = "Pause: " + pause;
 				}
