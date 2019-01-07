@@ -73,7 +73,7 @@ bool native_can_write(struct CANframe_t msg) {
     return retval == sizeof(struct can_frame);
 }
 
-bool native_can_read(struct CANframe_t msg) {
+bool native_can_read(struct CANframe_t *msg) {
 
     struct can_frame frame;
     
@@ -82,12 +82,12 @@ bool native_can_read(struct CANframe_t msg) {
 
     int retval = 0;
 
-    retval = read(can_soc, frame, sizeof(struct can_frame));
+    retval = read(can_soc, &frame, sizeof(struct can_frame));
     bool ok = retval == sizeof(struct can_frame);
 
-    msg.id = frame.can_id;
-    msg.dlc = frame.can_dlc;
-    msg.data = *reinterpret_cast<uint64_t*>(frame.data);
+    msg->id = frame.can_id;
+    msg->dlc = frame.can_dlc;
+    msg->data = *reinterpret_cast<uint64_t*>(frame.data);
 
     //if(ok) {
     //    struct timeval tv;
