@@ -19,7 +19,7 @@ bool can_private_write_vals(float *vals) {
     // speed
     msg.frame.can_id = 0x155;
     msg.frame.can_dlc = 8;    
-    encode_can_0x155_ESP_vehicleSpeed(&ESP_B, vals[1]);
+    encode_can_0x155_ESP_vehicleSpeed(&ESP_B, vals[1]*3.6);
     pack_can_0x155_ESP_B(&ESP_B, msg.data()); // fill data 
     status = status && tkbridge_can_write_fd(msg.frame);
 

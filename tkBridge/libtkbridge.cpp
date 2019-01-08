@@ -120,7 +120,7 @@ bool tkbridge_can_read(struct can_frame *frame) {
  */
 bool tkbridge_can_write_vals(float *vals, int n_vals) {
 
-    if(can_soc < 0 || n_vals < 2)
+    if(can_soc < 0 || n_vals < 5)
         return false;
 
     return can_private_write_vals(vals);
