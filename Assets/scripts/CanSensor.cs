@@ -38,7 +38,7 @@ public class CanSensor : MonoBehaviour {
 		vals [3] = locAcc.z;			    // accX     m/s
 		vals [4] = -locAcc.x;				// accY     m/s       axis are inverted
 
-		Debug.Log ("yaw: " + vals[2]);
+		//Debug.Log ("yaw: " + vals[2]);
 	}
 		
 	void canUpdate () {

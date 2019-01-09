@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114529627169303376}
   - component: {fileID: 114544547806788692}
   - component: {fileID: 114902341380508376}
+  - component: {fileID: 114006731532435228}
   m_Layer: 0
   m_Name: simVehicle
   m_TagString: Untagged
@@ -2177,6 +2178,19 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195722156509068}
   m_Enabled: 1
+--- !u!114 &114006731532435228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039423521201786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485c58be73e9a440f818fe5e145af0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ok: 0
+  HZ: 5
 --- !u!114 &114529627169303376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2757,13 +2771,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039423521201786}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77cda7f0ca4ab473db3f9dbffb2f6a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ok: 0
   vehicle: {fileID: 114529627169303376}
+  rb: {fileID: 0}
 --- !u!114 &114741990050211304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2794,6 +2809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ok: 0
+  localSend: 1
 --- !u!114 &114902341380508376
 MonoBehaviour:
   m_ObjectHideFlags: 1

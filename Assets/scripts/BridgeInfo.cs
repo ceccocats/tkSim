@@ -8,6 +8,7 @@ public class BridgeInfo : MonoBehaviour {
 	Velodyne_UDP_Send lidar_sens;
 	CanSensor can_sens;
 	CameraSensor cam_sens;
+	GPSSensor gps_sens;
 
 	public GameObject vehicle;
 	public Text text;
@@ -17,6 +18,7 @@ public class BridgeInfo : MonoBehaviour {
 		lidar_sens = vehicle.GetComponentInChildren<Velodyne_UDP_Send> ();
 		can_sens = vehicle.GetComponentInChildren<CanSensor> ();
 		cam_sens = vehicle.GetComponentInChildren<CameraSensor> ();
+		gps_sens = vehicle.GetComponentInChildren<GPSSensor> ();
 
 	}
 		
@@ -30,10 +32,11 @@ public class BridgeInfo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
 		text.text = "Sensors:\n" + 
 			getColorStr(lidar_sens.ok) + " lidar  \n" + 
 			getColorStr(can_sens.ok)   + " CAN    \n" + 
-			getColorStr(cam_sens.ok)   + " camera \n";
+			getColorStr(cam_sens.ok)   + " camera \n" +
+			getColorStr(gps_sens.ok)   + " gps \n";
+
 	}
 }
