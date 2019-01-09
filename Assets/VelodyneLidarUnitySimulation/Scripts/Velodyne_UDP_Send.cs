@@ -10,7 +10,7 @@ using System.IO;
 public class Velodyne_UDP_Send : MonoBehaviour
 {
     // 
-    //public static string IP = "192.168.1.70";
+    public static string IP = "192.168.1.255";
     public static int port = 2368;
     public static int numDataBLocks = 12;
 
@@ -190,8 +190,8 @@ public class Velodyne_UDP_Send : MonoBehaviour
 
     public void Start()
     {
-        //broadcast = IPAddress.Parse(IP);
-		ep = new IPEndPoint(IPAddress.Broadcast, 2368);
+        broadcast = IPAddress.Parse(IP);
+		ep = new IPEndPoint(broadcast, 2368);
         s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 		s.EnableBroadcast = true;
 		lidarGO = gameObject.GetComponent<Lidar>();
