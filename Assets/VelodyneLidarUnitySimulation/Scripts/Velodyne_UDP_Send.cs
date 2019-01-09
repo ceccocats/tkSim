@@ -23,6 +23,7 @@ public class Velodyne_UDP_Send : MonoBehaviour
     private static IPEndPoint ep;
     private static Socket s;
 	public bool ok = false;
+	public bool localSend = true;
 
     //gos
     private static Lidar lidarGO;
@@ -190,7 +191,11 @@ public class Velodyne_UDP_Send : MonoBehaviour
 
     public void Start()
     {
-        broadcast = IPAddress.Parse(IP);
+		if(localSend)
+        	broadcast = IPAddress.Parse(IP);
+		else
+			broadcast = IPAddress.Broadcast;
+
 		ep = new IPEndPoint(broadcast, 2368);
         s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 		s.EnableBroadcast = true;
