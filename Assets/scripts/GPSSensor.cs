@@ -11,8 +11,18 @@ public class GPSSensor : MonoBehaviour {
 	public int HZ = 5;
 	private StreamWriter sw;
 
+	private const double R = 6371000.0;
+	private const double lat0 = 44.629046;
+	private const double lon0 = 10.950265;
+	private const double h0 = 80;
+	private double x0, y0, cosLat0;
+
 	// Use this for initialization
 	void Start () {
+		// origin coordinates
+		cosLat0 = (double) Mathf.Cos( (float) lat0);
+		x0 = R*lon0*cosLat0;
+		y0 = R*lat0;
 
 		FileStream fs = File.OpenWrite( "/tmp/ttyGPSin" );
 		sw = new StreamWriter (fs);
@@ -20,9 +30,12 @@ public class GPSSensor : MonoBehaviour {
 	}
 
 	void GpsUpdate() {
-		double lat         = 0;
-		double lon         = 0;
-		double h           = 0;
+		double lat, lon, h;
+		double x, y, z;
+		GpsUtils.EnuToEcef (transform.position.x, transform.position.z, transform.position.y,
+			lat0, lon0, h0, out x, out y, out z);
+		GpsUtils.EcefToGeodetic (x, y, z, out lat, out lon, out h);
+
 		int    quality     = 1;
 		int    nsats       = 10;
 		double hdop        = 1.0;
@@ -32,14 +45,14 @@ public class GPSSensor : MonoBehaviour {
 		// build string
 		string gngga = "$GNGGA,";
 		gngga += System.DateTime.Now.ToString("HHmmss.ff,"); // timestamp
-		gngga += string.Format ("{0:N5},N,", lat*100);       // lat
-		gngga += string.Format ("{0:N5},W,", lon*100);       // lon
+		gngga += string.Format ("{0},N,", lat*100);       // lat
+		gngga += string.Format ("{0},W,", lon*100);       // lon
 		gngga += quality + ",";   					         // quality
 		gngga += nsats + ",";   					         // n satellites
-		gngga += string.Format ("{0:N1},", hdop);            // HDOP
-		gngga += string.Format ("{0:N3},M,", h);             // height
-		gngga += string.Format ("{0:N3},M,", geodial_sep);   // height
-		gngga += string.Format ("{0:N1},", age);             // age of correction
+		gngga += string.Format ("{0},", hdop);            // HDOP
+		gngga += string.Format ("{0},M,", h);             // height
+		gngga += string.Format ("{0},M,", geodial_sep);   // height
+		gngga += string.Format ("{0},", age);             // age of correction
 		gngga += "0000";						             // id of correction
 
 		int checksum = 0; 
@@ -57,6 +70,7 @@ public class GPSSensor : MonoBehaviour {
 			ok = false;
 		}
 	}
+		
 
 	void Update() {
 
