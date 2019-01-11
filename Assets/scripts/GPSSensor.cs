@@ -32,16 +32,17 @@ public class GPSSensor : MonoBehaviour {
 	void GpsUpdate() {
 		double lat, lon, h;
 		double x, y, z;
-		GpsUtils.EnuToEcef (transform.position.x, transform.position.z, transform.position.y,
+		GpsUtils.EnuToEcef (-transform.position.x, -transform.position.z, transform.position.y,
 			lat0, lon0, h0, out x, out y, out z);
 		GpsUtils.EcefToGeodetic (x, y, z, out lat, out lon, out h);
-
 		int    quality     = 1;
 		int    nsats       = 10;
 		double hdop        = 1.0;
 		double geodial_sep = 0;
 		double age         = 1.0;
 
+		//Debug.Log ("lat/lon: "+ lat +" "+ lon);
+			
 		// build string
 		string gngga = "$GNGGA,";
 		gngga += System.DateTime.Now.ToString("HHmmss.ff,"); // timestamp
