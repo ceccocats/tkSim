@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lidar : MonoBehaviour {
 
+	public bool debugRay = false;
     public float maxAngle = 10;
     public float minAngle = -10;
     public int numberOfLayers = 16;
@@ -55,7 +56,8 @@ public class Lidar : MonoBehaviour {
                 {
                     distances[indx] = 0.0f;
                 }
-				//Debug.DrawRay(transform.position, dir * distances[indx], Color.green);
+				if(debugRay)
+					Debug.DrawRay(transform.position, dir * distances[indx], Color.green);
 
             }
         }

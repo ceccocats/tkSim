@@ -2778,7 +2778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ok: 0
   vehicle: {fileID: 114529627169303376}
-  rb: {fileID: 0}
+  rb: {fileID: 54144707903126870}
 --- !u!114 &114741990050211304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2790,10 +2790,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71c4a8b89bb449e6b5d7996d0dac0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugRay: 0
   maxAngle: 10
   minAngle: -10
   numberOfLayers: 16
-  numberOfIncrements: 360
+  numberOfIncrements: 1440
   maxRange: 100
   distances: []
   azimuts: []
