@@ -444,11 +444,17 @@ Prefab:
     - target: {fileID: 114544547806788692, guid: 0553c7bf7c2ba4dd68d6059f830ceacf,
         type: 2}
       propertyPath: port
-      value: vcan0
+      value: can0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0553c7bf7c2ba4dd68d6059f830ceacf, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1140306025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114544547806788692, guid: 0553c7bf7c2ba4dd68d6059f830ceacf,
+    type: 2}
+  m_PrefabInternal: {fileID: 1140306024}
+  m_Script: {fileID: 11500000, guid: 77cda7f0ca4ab473db3f9dbffb2f6a95, type: 3}
 --- !u!1 &1213037809
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,8 +490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.71433336}
   m_AnchorMax: {x: 0.18900001, y: 0.8916667}
-  m_AnchoredPosition: {x: -32.4, y: -133.2}
-  m_SizeDelta: {x: -69.37, y: 44.99}
+  m_AnchoredPosition: {x: -32.4, y: -171.69}
+  m_SizeDelta: {x: -69.37, y: 121.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213037811
 MonoBehaviour:
@@ -557,8 +563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8736317}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.89001465, y: -66.6}
-  m_SizeDelta: {x: -14.42, y: 113.18}
+  m_AnchoredPosition: {x: -0.89001465, y: -99.18}
+  m_SizeDelta: {x: -14.42, y: 178.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1276891172
 MonoBehaviour:
@@ -902,6 +908,11 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1644855939}
+    - target: {fileID: 114377021978642006, guid: b6883ab16065ce74589a2e2f0874e149,
+        type: 2}
+      propertyPath: can
+      value: 
+      objectReference: {fileID: 1140306025}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6883ab16065ce74589a2e2f0874e149, type: 2}
   m_IsPrefabAsset: 0

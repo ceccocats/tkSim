@@ -32,9 +32,11 @@ public class BridgeInfo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		text.text = "Sensors:\n" + 
+		text.text = "Manual: " + getColorStr(can_sens.manual) + "\n" +
+			"Sensors:\n" + 
 			getColorStr(lidar_sens.ok) + " lidar  \n" + 
-			getColorStr(can_sens.ok)   + " CAN    \n" + 
+			getColorStr(can_sens.ok)      + " CAN_TX \n" +
+			getColorStr(can_sens.ok_read) + " CAN_RX \n" + 
 			getColorStr(cam_sens.ok)   + " camera \n" +
 			getColorStr(gps_sens.ok)   + " gps \n";
 

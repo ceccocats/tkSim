@@ -20,6 +20,8 @@ public class tkBridge : MonoBehaviour {
 	[DllImport ("libtkbridge")]
 	public static extern bool tkbridge_can_write_vals (float [] vals, int n_vals);
 	[DllImport ("libtkbridge")]
+	public static extern bool tkbridge_can_read_vals (float [] vals, int n_vals);
+	[DllImport ("libtkbridge")]
 	public static extern bool tkbridge_camera_init ();
 	[DllImport ("libtkbridge")]
 	public static extern bool tkbridge_camera(byte [] data, int len);

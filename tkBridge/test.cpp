@@ -10,7 +10,7 @@ extern "C" {
 
 int main() {
 
-    const char *port = "vcan0";
+    const char *port = "can0";
     float vals[5];
     bool status;
     

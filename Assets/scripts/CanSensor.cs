@@ -7,8 +7,15 @@ public class CanSensor : MonoBehaviour {
 	public string port = "vcan0";
 
 	public bool ok;
+	public bool ok_read;
+
 	public MSVehicleControllerFree vehicle;
 	private float [] vals = new float[5];
+	private float [] read_vals = new float[2];
+
+	public float steer_rq = 0;
+	public float accel_rq = 0;
+	public bool manual;
 
 	public Rigidbody rb;
 
@@ -40,9 +47,13 @@ public class CanSensor : MonoBehaviour {
 		vals [4] = -locAcc.x;				// accY     m/s       axis are inverted
 
 		//Debug.Log ("yaw: " + vals[2]);
+
+		steer_rq = read_vals [0];
+		accel_rq = read_vals [1];
 	}
 		
 	void canUpdate () {
 		ok = tkBridge.tkbridge_can_write_vals (vals, 5);
+		ok_read = tkBridge.tkbridge_can_read_vals (read_vals, 2);
 	}
 }

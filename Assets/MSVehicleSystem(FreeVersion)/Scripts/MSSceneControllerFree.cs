@@ -41,6 +41,8 @@ public class ControlsFree {
 
 public class MSSceneControllerFree : MonoBehaviour {
 
+	public CanSensor can;
+
 	#region defineInputs
 	[Tooltip("Vertical input recognized by the system")]
 	public string _verticalInput = "Vertical";
@@ -58,7 +60,7 @@ public class MSSceneControllerFree : MonoBehaviour {
 	public string _mouseScrollWheelInput = "Mouse ScrollWheel";
 	#endregion
 
-	public enum ControlTypeFree{windows, mobileButton};
+	public enum ControlTypeFree{windows, mobileButton,ad};
 
 	[Space(10)][Tooltip("Here you can configure the vehicle controls, choose the desired inputs and also, deactivate the unwanted ones.")]
 	public ControlsFree controls;
@@ -264,6 +266,22 @@ public class MSSceneControllerFree : MonoBehaviour {
 	}
 
 	void Update () {
+
+		// change and update manual status
+		if (Input.GetButtonDown ("Manual")) {
+			if (selectControls == ControlTypeFree.ad) {
+				selectControls = ControlTypeFree.windows;
+			} else {
+				selectControls = ControlTypeFree.ad;
+			}
+		}
+		if (selectControls == ControlTypeFree.ad)
+			can.manual = false;
+		else
+			can.manual = true;
+
+
+		
 		if (!error) {
 			#region customizeInputsValues
 			switch (selectControls) {
@@ -285,6 +303,13 @@ public class MSSceneControllerFree : MonoBehaviour {
 			case ControlTypeFree.windows:
 				verticalInput = Input.GetAxis (_verticalInput);
 				horizontalInput = Input.GetAxis (_horizontalInput);
+				mouseXInput = Input.GetAxis (_mouseXInput);
+				mouseYInput = Input.GetAxis (_mouseYInput);
+				mouseScrollWheelInput = Input.GetAxis (_mouseScrollWheelInput);
+				break;
+			case ControlTypeFree.ad:
+				verticalInput   = can.accel_rq;
+				horizontalInput = can.steer_rq;
 				mouseXInput = Input.GetAxis (_mouseXInput);
 				mouseYInput = Input.GetAxis (_mouseYInput);
 				mouseScrollWheelInput = Input.GetAxis (_mouseScrollWheelInput);
@@ -500,6 +525,7 @@ public class MSSceneControllerFree : MonoBehaviour {
 				buttonDown.gameObject.SetActive (insideInCar);
 			}
 			break;
+		case ControlTypeFree.ad:
 		case ControlTypeFree.windows:
 			if (cameraMobileButton) {
 				cameraMobileButton.gameObject.SetActive (false);

@@ -15,24 +15,28 @@ bool native_can_init(char *port) {
     std::string port_type = "can";
     std::string modprobe = "";
     std::string set = "set";
+    std::string bitrate = "bitrate 500000";
 
     if(port[0] == 'v') {
         port_type = "vcan";
         modprobe = "modprobe vcan;";
         set = "add";
+        bitrate = "";
     }
 
     std::string check = std::string("ifconfig | grep ^") + port_str;
 
     std::string conf = std::string("gksu -- bash -c '") + modprobe +
-                       " ip link " + set + " dev " + port_str + " type " + port_type +
-                       "  bitrate 500000" +  
+                       " ip link " + set + " " + port_str + " type " + port_type +
+                       + " " + bitrate +  
                        "; ip link set down " + port_str + 
                        "; ip link set up " + port_str + "'";
 
     // init device
-    if(system(check.c_str()) != 0)
+    if(system(check.c_str()) != 0) {
+        printf("%s\n", conf.c_str());
         system(conf.c_str());
+    }
 
     struct ifreq ifr;
     struct sockaddr_can addr;
