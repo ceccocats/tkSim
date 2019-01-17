@@ -10,7 +10,7 @@ extern "C" {
 
 int main() {
 
-    const char *port = "can0";
+    const char *port = "vcan0";
     float vals[5];
     bool status;
     
@@ -25,6 +25,7 @@ int main() {
 
     while(true) {    
         status = tkbridge_can_read_vals(vals,2);
+        printf("vals: %f    %f\n", vals[0], vals[1]);
         printf("Can read: %d\n", status);
         usleep(100000);
     }

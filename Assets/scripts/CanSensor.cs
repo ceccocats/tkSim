@@ -50,6 +50,7 @@ public class CanSensor : MonoBehaviour {
 
 		steer_rq = read_vals [0];
 		accel_rq = read_vals [1];
+		Debug.Log ("steer: " + steer_rq + "  Accel: " + accel_rq);
 	}
 		
 	void canUpdate () {
