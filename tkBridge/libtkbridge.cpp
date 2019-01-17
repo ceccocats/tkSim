@@ -69,6 +69,20 @@ bool tkbridge_can_write_vals(float *vals, int n_vals) {
     return can_private_write_vals(vals);
 }
 
+/** 
+ *  read values in order:
+ *  - steer angle
+ *  - speed
+ */
+bool tkbridge_can_read_vals(float *vals, int n_vals) {
+
+    if(can_soc < 0 || n_vals < 2)
+        return false;
+
+    return can_private_read_vals(vals);
+}
+
+
 bool tkbridge_camera_init() {
 
     // make fifo file for ffmpeg

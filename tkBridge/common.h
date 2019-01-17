@@ -13,9 +13,11 @@ struct CANframe_t {
 };
  
 bool can_private_write_vals(float *vals);
- 
+bool can_private_read_vals(float *vals);
+
 extern "C" {
     bool tkbridge_can_write_fd(struct CANframe_t frame);
+    bool tkbridge_can_read(struct CANframe_t *frame);
 }
 
 

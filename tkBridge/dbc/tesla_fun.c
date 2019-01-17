@@ -25,3 +25,12 @@ bool can_private_write_vals(float *vals) {
     
     return status;
 }
+
+bool can_private_read_vals(float *vals) {
+
+    bool status = true;
+
+    vals[0] = 0;
+    vals[1] = 0;
+    return status;
+}
