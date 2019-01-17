@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CanSensor : MonoBehaviour {
 
-	public bool ok;
+	public string port = "vcan0";
 
+	public bool ok;
 	public MSVehicleControllerFree vehicle;
 	private float [] vals = new float[5];
 
@@ -14,7 +15,7 @@ public class CanSensor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		ok = tkBridge.tkbridge_can_init ("vcan0");
+		ok = tkBridge.tkbridge_can_init (port);
 		InvokeRepeating("canUpdate", 0.0f, 1.0f/50.0f);
 	}
 	

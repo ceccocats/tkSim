@@ -10,9 +10,29 @@ extern "C" {
 static int can_soc = -1;
 
 bool native_can_init(char *port) {
-    // init virtual device
-    if(system("ifconfig | grep vcan0") != 0)
-        system("gksu -- bash -c 'modprobe vcan; ip link add dev vcan0 type vcan; ip link set down vcan0; ip link set up vcan0'");
+
+    std::string port_str(port);
+    std::string port_type = "can";
+    std::string modprobe = "";
+    std::string set = "set";
+
+    if(port[0] == 'v') {
+        port_type = "vcan";
+        modprobe = "modprobe vcan;";
+        set = "add";
+    }
+
+    std::string check = std::string("ifconfig | grep ^") + port_str;
+
+    std::string conf = std::string("gksu -- bash -c '") + modprobe +
+                       " ip link " + set + " dev " + port_str + " type " + port_type +
+                       "  bitrate 500000" +  
+                       "; ip link set down " + port_str + 
+                       "; ip link set up " + port_str + "'";
+
+    // init device
+    if(system(check.c_str()) != 0)
+        system(conf.c_str());
 
     struct ifreq ifr;
     struct sockaddr_can addr;

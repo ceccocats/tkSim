@@ -436,6 +436,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114741990050211304, guid: 0553c7bf7c2ba4dd68d6059f830ceacf,
+        type: 2}
+      propertyPath: numberOfIncrements
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 114544547806788692, guid: 0553c7bf7c2ba4dd68d6059f830ceacf,
+        type: 2}
+      propertyPath: port
+      value: can0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0553c7bf7c2ba4dd68d6059f830ceacf, type: 2}
   m_IsPrefabAsset: 0
