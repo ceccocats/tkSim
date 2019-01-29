@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 114529627169303376}
   - component: {fileID: 114544547806788692}
   - component: {fileID: 114902341380508376}
-  - component: {fileID: 114006731532435228}
   m_Layer: 0
   m_Name: simVehicle
   m_TagString: Untagged
@@ -207,6 +206,22 @@ GameObject:
   - component: {fileID: 4519588826595416}
   m_Layer: 0
   m_Name: 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1223363835697738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4577731968902864}
+  - component: {fileID: 114411547971370438}
+  m_Layer: 0
+  m_Name: gps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -948,7 +963,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 1, z: 0.05}
   m_Children: []
   m_Father: {fileID: 4870994318458212}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!4 &4478316265424452
 Transform:
@@ -1004,6 +1019,19 @@ Transform:
   m_Father: {fileID: 4160005947499952}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -64.966, z: 0}
+--- !u!4 &4577731968902864
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1223363835697738}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6519998, z: -2.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4870994318458212}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4633383175463022
 Transform:
   m_ObjectHideFlags: 1
@@ -1107,6 +1135,7 @@ Transform:
   - {fileID: 4046323366174436}
   - {fileID: 4678636474774532}
   - {fileID: 4166455072514386}
+  - {fileID: 4577731968902864}
   - {fileID: 4463710768576392}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2178,12 +2207,12 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195722156509068}
   m_Enabled: 1
---- !u!114 &114006731532435228
+--- !u!114 &114411547971370438
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1039423521201786}
+  m_GameObject: {fileID: 1223363835697738}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 485c58be73e9a440f818fe5e145af0b7, type: 3}
@@ -2776,8 +2805,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cda7f0ca4ab473db3f9dbffb2f6a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  port: vcan0
   ok: 0
+  ok_read: 0
   vehicle: {fileID: 114529627169303376}
+  steer_rq: 0
+  accel_rq: 0
+  manual: 0
   rb: {fileID: 54144707903126870}
 --- !u!114 &114741990050211304
 MonoBehaviour:
@@ -2794,7 +2828,7 @@ MonoBehaviour:
   maxAngle: 10
   minAngle: -10
   numberOfLayers: 16
-  numberOfIncrements: 1440
+  numberOfIncrements: 360
   maxRange: 100
   distances: []
   azimuts: []

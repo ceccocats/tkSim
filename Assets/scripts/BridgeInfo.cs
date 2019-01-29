@@ -34,11 +34,11 @@ public class BridgeInfo : MonoBehaviour {
 
 		text.text = "Manual: " + getColorStr(can_sens.manual) + "\n" +
 			"Sensors:\n" + 
-			getColorStr(lidar_sens.ok) + " lidar  \n" + 
-			getColorStr(can_sens.ok)      + " CAN_TX \n" +
-			getColorStr(can_sens.ok_read) + " CAN_RX \n" + 
-			getColorStr(cam_sens.ok)   + " camera \n" +
-			getColorStr(gps_sens.ok)   + " gps \n";
+			getColorStr((lidar_sens != null && lidar_sens.ok)) + " lidar  \n" + 
+			getColorStr((can_sens != null && can_sens.ok))      + " CAN_TX \n" +
+			getColorStr((can_sens != null && can_sens.ok_read)) + " CAN_RX \n" + 
+			getColorStr((cam_sens != null && cam_sens.ok))   + " camera \n" +
+			getColorStr((gps_sens != null && gps_sens.ok))   + " gps \n";
 
 	}
 }

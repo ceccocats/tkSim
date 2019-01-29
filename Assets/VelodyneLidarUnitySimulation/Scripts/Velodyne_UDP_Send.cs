@@ -191,7 +191,7 @@ public class Velodyne_UDP_Send : MonoBehaviour
 
     public void Start()
     {
-		if(localSend)
+		if(!localSend)
         	broadcast = IPAddress.Parse(IP);
 		else
 			broadcast = IPAddress.Broadcast;
