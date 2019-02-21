@@ -1,3 +1,7 @@
+# unity version
+2018.2.7f1
+https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/page-2#post-3662605
+
 # credits
 MSVehicleSystem (Free)
 https://github.com/vwaurich/VelodyneLidarUnitySimulation
