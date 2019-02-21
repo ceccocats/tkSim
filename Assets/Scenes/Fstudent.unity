@@ -10692,6 +10692,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cb98d78c5519e4b22a64a9e4b61a17f4, type: 2}
+    - target: {fileID: 114659859663516900, guid: 10ae5cc206d394a95a66ad1ddbda7e70,
+        type: 2}
+      propertyPath: _skidMarks.standardBrandWidth
+      value: 5.77
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10ae5cc206d394a95a66ad1ddbda7e70, type: 2}
   m_IsPrefabAsset: 0

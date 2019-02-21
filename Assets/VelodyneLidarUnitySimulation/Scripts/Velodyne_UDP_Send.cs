@@ -10,7 +10,7 @@ using System.IO;
 public class Velodyne_UDP_Send : MonoBehaviour
 {
     // 
-    public static string IP = "192.168.1.255";
+    public string IP = "192.168.1.255";
     public static int port = 2368;
     public static int numDataBLocks = 12;
 

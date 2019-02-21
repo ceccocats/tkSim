@@ -17,10 +17,15 @@ dbcc -k -u tesla_can.dbc
 #camera
 sudo apt install v4l2loopback-* 
 
-then:
+then for local:
 sudo modprobe v4l2loopback
 mkfifo /tmp/tkcamera0
 tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -vcodec rawvideo -pix_fmt yuyv422 -threads 0 -f v4l2 /dev/video1
+
+for stream:
+tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -vcodec mpeg4 -pix_fmt yuyv422 -f mpegts udp://127.0.0.1:23000
+seems better:
+tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://127.0.0.1:23000
 
 #gps
 socat -u -u pty,raw,echo=0,link=/tmp/ttyGPSin pty,raw,echo=0,link=/tmp/ttyGPS,b9600 

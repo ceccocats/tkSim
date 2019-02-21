@@ -1005,6 +1005,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 				handBrakeTrue = !handBrakeTrue;
 			}
 		}
+
 		//
 		DiscoverAverageRpm();
 		InputsCameras ();
@@ -1673,6 +1674,10 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			}
 		}
 
+		// no retro on autonomous
+		if (controls.selectControls == MSSceneControllerFree.ControlTypeFree.ad && currentGear < 0)
+			currentGear = 1;
+
 		//
 		if (currentGear > 0) {
 			if (KMh > (_vehicleTorque.idealVelocityGears [currentGear - 1] * _vehicleTorque.speedOfGear + 7 * _vehicleTorque.speedOfGear)) {
@@ -1708,7 +1713,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	void Volant(){
 		angle1Ref = Mathf.MoveTowards(angle1Ref, horizontalInput, 2*Time.deltaTime);
 		angle2Volant = Mathf.MoveTowards(angle2Volant, horizontalInput, 2*Time.deltaTime);
-		maxAngleVolant = 27.0f * _vehicleSettings.angle_x_Velocity.Evaluate (KMh);
+		maxAngleVolant = 40.0f * _vehicleSettings.angle_x_Velocity.Evaluate (KMh);
 		angleRefVolant = Mathf.Clamp (angle1Ref * maxAngleVolant, -maxAngleVolant, maxAngleVolant);
 
 		//APLICAR ANGULO NAS RODAS--------------------------------------------------------------------------------------------------------------
@@ -1769,7 +1774,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (!isInsideTheCar) {
 			return 0;
 		}
-		if ((Mathf.Abs (verticalInput) < 0.5f) || KMh > _vehicleTorque.maxVelocityKMh) {
+		//if ((Mathf.Abs (verticalInput) < 0.5f) || KMh > _vehicleTorque.maxVelocityKMh) {
+		if (KMh > _vehicleTorque.maxVelocityKMh) {
 			return 0;
 		}
 		if ((rpmTempTorque*wheelCollider.radius) > (50.0f * _vehicleTorque.numberOfGears*_vehicleTorque.speedOfGear)){
@@ -1817,6 +1823,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			adjustTorque = 1;
 		}
 
+		//Debug.Log ("input: " + engineInput + ", trq: " + torqueM * adjustTorque * vehicleScale);
 		return torqueM * adjustTorque * vehicleScale;
 	}
 
@@ -1851,6 +1858,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 				_wheels.leftRearWheel.wheelCollider.motorTorque = 0;
 			}
 		}
+
 	}
 	#endregion
 

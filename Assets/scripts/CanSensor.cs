@@ -29,7 +29,7 @@ public class CanSensor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// current steer in degs
-		float cur_steer = -(vehicle._wheels.leftFrontWheel.wheelCollider.steerAngle+vehicle._wheels.rightFrontWheel.wheelCollider.steerAngle)/2;
+		float cur_steer = (vehicle._wheels.leftFrontWheel.wheelCollider.steerAngle+vehicle._wheels.rightFrontWheel.wheelCollider.steerAngle)/2;
 
 		// compute acceleration
 		Vector3 acc;
@@ -48,9 +48,9 @@ public class CanSensor : MonoBehaviour {
 
 		//Debug.Log ("yaw: " + vals[2]);
 
-		steer_rq = read_vals [0];
+		steer_rq = -read_vals [0]/0.6f;
 		accel_rq = read_vals [1];
-		Debug.Log ("steer: " + steer_rq + "  Accel: " + accel_rq);
+		//Debug.Log ("steer: " + steer_rq + "  Accel: " + accel_rq);
 	}
 		
 	void canUpdate () {
