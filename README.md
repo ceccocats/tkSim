@@ -29,7 +29,9 @@ tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -vcodec rawvideo -pix_fmt yuyv42
 for stream:
 tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -vcodec mpeg4 -pix_fmt yuyv422 -f mpegts udp://127.0.0.1:23000
 seems better:
-tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://127.0.0.1:23000
+tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://192.168.1.207:23000
+
+while true; do tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://192.168.1.207:23000; done
 
 #gps
 socat -u -u pty,raw,echo=0,link=/tmp/ttyGPSin pty,raw,echo=0,link=/tmp/ttyGPS,b9600 

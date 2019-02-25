@@ -24,6 +24,7 @@ public class CanSensor : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		ok = tkBridge.tkbridge_can_init (port);
 		InvokeRepeating("canUpdate", 0.0f, 1.0f/50.0f);
+		InvokeRepeating("canRead", 0.0f, 1.0f/20.0f);
 	}
 	
 	// Update is called once per frame
@@ -50,11 +51,19 @@ public class CanSensor : MonoBehaviour {
 
 		steer_rq = -read_vals [0]/0.6f;
 		accel_rq = read_vals [1];
-		//Debug.Log ("steer: " + steer_rq + "  Accel: " + accel_rq);
+		if(accel_rq > 0.2f)
+			accel_rq = 0.2f;
+		Debug.Log ("steer: " + steer_rq + "  Accel: " + accel_rq);
 	}
 		
 	void canUpdate () {
 		ok = tkBridge.tkbridge_can_write_vals (vals, 5);
+	}
+	void canRead () {
 		ok_read = tkBridge.tkbridge_can_read_vals (read_vals, 2);
+		if(!ok_read) {
+			read_vals[0] = 0f;
+			read_vals[1] = -0.5f;		
+		}
 	}
 }

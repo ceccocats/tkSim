@@ -1,7 +1,7 @@
 all: libtkbridge
 
 # confs
-UNITY_DIR=/home/cecco/Programmi/Unity2018/Editor/
+UNITY_DIR=/home/tk/Unity-2018.2.7f1/Editor/
 #CAN_LIB_PATH=dbc/
 CAN_LIB_PATH=dbc_hipertcar/
 
