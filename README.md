@@ -1,37 +1,37 @@
-# unity version
-2018.2.7f1
-https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/page-2#post-3662605
+# tkSim
+tk general porpose simulator.
+Ready to simulate:
+- car
+- formula
+- forklift (ROS)
 
-# credits
-MSVehicleSystem (Free)
-https://github.com/vwaurich/VelodyneLidarUnitySimulation
-https://github.com/tordanik/OSM2World
-https://raw.githubusercontent.com/commaai/opendbc/master/tesla_can.dbc
-https://github.com/howerj/dbcc.git
+### unity3d version: 2019.3.7f1
 
-# Build map with OSM2World
-export data
-https://www.openstreetmap.org/export#map=18/44.62907/10.95028
-convert to obj with OSM2World
-refine with blender
+# getting started without ROS
+- compile tkBrige
+- chatlist commands in  NoRos folder
 
-# convert dbc
-dbcc -k -u tesla_can.dbc
+### supported sensors
+- lidar
+- GPS
+- canbus
+- camera
 
-#camera
-sudo apt install v4l2loopback-* 
+# getting started with ROS
+ROS is the easiest way to start simulation on tkSim
 
-then for local:
-sudo modprobe v4l2loopback
-mkfifo /tmp/tkcamera0
-tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -vcodec rawvideo -pix_fmt yuyv422 -threads 0 -f v4l2 /dev/video1
+### supported sensors
+- lidar
+- Odometry
+- camera
+  
+### forklift scene
+- open scene file:<br>
+   `Assets/Ros/Scenes/industrial.unity`
+- launch rosbrige in terminal:<br>
+``` roslaunch rosbridge_server rosbridge_websocket.launch```
+- start scene
+- sensors are now published on ROS
 
-for stream:
-tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -vcodec mpeg4 -pix_fmt yuyv422 -f mpegts udp://127.0.0.1:23000
-seems better:
-tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://192.168.1.207:23000
-
-while true; do tail -c +1 -F /tmp/tkcamera0 | ffmpeg -i pipe:0 -fflags nobuffer -threads 2 -tune zerolatency  -f mpegts udp://192.168.1.207:23000; done
-
-#gps
-socat -u -u pty,raw,echo=0,link=/tmp/ttyGPSin pty,raw,echo=0,link=/tmp/ttyGPS,b9600 
+![Unity3d](https://user-images.githubusercontent.com/11562617/78570956-f0f60700-7825-11ea-9fe0-a71c5a48e58b.png)
+![rviz](https://user-images.githubusercontent.com/11562617/78570946-ef2c4380-7825-11ea-9e42-c0842df7ddde.png)
