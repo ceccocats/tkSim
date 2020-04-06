@@ -23,6 +23,7 @@ public class VeloLidar : MonoBehaviour {
         points = new Vector3[numberOfLayers* numberOfIncrements];
         vertIncrement = (float)(maxAngle - minAngle) / (float)(numberOfLayers - 1);
         azimutIncrAngle = (float)(360.0f / numberOfIncrements);
+        debugRay = false;
     }
 
 
