@@ -138,8 +138,8 @@ using UnityEngine;
                 m_WheelMeshes[i].transform.rotation = quat;
             }
 
-            //clamp input values
             steering = Mathf.Clamp(steering, -1, 1);
+            //clamp input values
             AccelInput = accel = Mathf.Clamp(accel, 0, 1);
             BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
             handbrake = Mathf.Clamp(handbrake, 0, 1);
