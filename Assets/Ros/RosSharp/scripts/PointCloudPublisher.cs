@@ -23,8 +23,6 @@ namespace RosSharp.RosBridgeClient
     public class PointCloudPublisher : UnityPublisher<MessageTypes.Sensor.PointCloud2>
     {
         public VeloLidar lidar;
-        public string FrameId = "Unity";
-
         private MessageTypes.Sensor.PointCloud message;
         private MessageTypes.Sensor.PointCloud2 finalMsg;
         private float scanPeriod;
@@ -52,7 +50,7 @@ namespace RosSharp.RosBridgeClient
 
             message = new MessageTypes.Sensor.PointCloud
             {
-                header = new MessageTypes.Std.Header { frame_id = FrameId }
+                header = new MessageTypes.Std.Header { frame_id = lidar.tag }
             };
             finalMsg = new MessageTypes.Sensor.PointCloud2();
         }

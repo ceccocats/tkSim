@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Vehicle
+  - lidar_link
+  - camera_link
   layers:
   - Default
   - TransparentFX

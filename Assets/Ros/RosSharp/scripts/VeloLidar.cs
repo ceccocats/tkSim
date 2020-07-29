@@ -21,7 +21,10 @@ public class VeloLidar : MonoBehaviour {
     // Use this for initialization
     void Start () {
         points = new Vector3[numberOfLayers* numberOfIncrements];
-        vertIncrement = (float)(maxAngle - minAngle) / (float)(numberOfLayers - 1);
+        if (numberOfLayers > 1)
+            vertIncrement = (float)(maxAngle - minAngle) / (float)(numberOfLayers - 1);
+        else 
+            vertIncrement = 0;
         azimutIncrAngle = (float)(360.0f / numberOfIncrements);
         debugRay = false;
     }
@@ -44,6 +47,7 @@ public class VeloLidar : MonoBehaviour {
                 indx = layer + incr * numberOfLayers;
                 angle = minAngle + (float)layer * vertIncrement;
                 float azimut = incr * azimutIncrAngle;
+                
                 dir = transform.rotation * Quaternion.Euler(-angle, azimut, 0)*fwd;
 
                 if (Physics.Raycast(transform.position, dir, out hit, maxRange))
