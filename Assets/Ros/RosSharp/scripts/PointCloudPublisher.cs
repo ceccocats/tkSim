@@ -50,7 +50,7 @@ namespace RosSharp.RosBridgeClient
 
             message = new MessageTypes.Sensor.PointCloud
             {
-                header = new MessageTypes.Std.Header { frame_id = lidar.tag }
+                header = new MessageTypes.Std.Header { frame_id = lidar.name }
             };
             finalMsg = new MessageTypes.Sensor.PointCloud2();
         }

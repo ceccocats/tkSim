@@ -36,7 +36,7 @@ namespace RosSharp.RosBridgeClient
             {
                 // fill header
                 message.transforms[i].header.Update();
-                message.transforms[i].child_frame_id        = list[i].tag;
+                message.transforms[i].child_frame_id        = list[i].name;
 
                 // fill trasform
                 message.transforms[i].transform.translation = GetGeometryVector3(list[i].transform.localPosition.Unity2Ros());

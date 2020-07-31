@@ -1279,7 +1279,7 @@ GameObject:
   - component: {fileID: 130923218}
   m_Layer: 0
   m_Name: velo
-  m_TagString: lidar_link
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ed6e7f9c239ae09bfcd85132ca1135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugRay: 0
+  debugRay: 1
   maxAngle: 0
   minAngle: 0
   numberOfLayers: 1
@@ -1772,6 +1772,7 @@ GameObject:
   - component: {fileID: 199083015}
   - component: {fileID: 199083014}
   - component: {fileID: 199083019}
+  - component: {fileID: 199083020}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
@@ -1822,7 +1823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Topic: /cam/compressed
   ImageCamera: {fileID: 1456680353}
-  FrameId: camera_link
+  FrameId: cam
   resolutionWidth: 640
   resolutionHeight: 480
   qualityLevel: 50
@@ -1873,6 +1874,21 @@ MonoBehaviour:
   list:
   - {fileID: 130923216}
   - {fileID: 1112753215}
+--- !u!114 &199083020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199083013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5a8fa11236cb205bfd589100124582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /actuation
+  TimeStep: 0
+  forklift: {fileID: 1000011889501069}
 --- !u!1 &201965568
 GameObject:
   m_ObjectHideFlags: 0
@@ -7982,7 +7998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170417086}
   m_LocalRotation: {x: 0.6532815, y: 0.6532815, z: 0.27059805, w: 0.27059805}
-  m_LocalPosition: {x: 0.587, y: 2.077, z: 6.972}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.10000003, y: 0.035000004, z: 0.100000024}
   m_Children: []
   m_Father: {fileID: 130923217}
@@ -9984,7 +10000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010853367534, guid: a806d004969b3054db4834b58b102064, type: 3}
       propertyPath: m_TagString
-      value: camera_link
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4000011252991948, guid: a806d004969b3054db4834b58b102064, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14252,7 +14268,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000011889501069}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de958ee16a804b146a134100e47aa7c9, type: 3}
   m_Name: 
